@@ -1,7 +1,14 @@
 [global]
+# enable .env loading
 load_dotenv = true
+
+# .envrc file must not return error
 strict_env = true
+
+# let me know if .envrc is slow
 warn_timeout = "300ms"
 
 [whitelist]
+
+# trust this projects, do not ask
 prefix = ["~/projects/konradodwrot"]
