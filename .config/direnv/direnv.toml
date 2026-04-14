@@ -1,0 +1,7 @@
+[global]
+load_dotenv = true
+strict_env = true
+warn_timeout = "300ms"
+
+[whitelist]
+prefix = ["~/projects/konradodwrot"]
