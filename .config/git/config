@@ -1,0 +1,21 @@
+[gpg]
+    format = ssh
+[user]
+    signingkey = /Users/konradodwrot/.ssh/id_ed25519.pub
+    name = Konrad Odwrót
+    email = odwrotkonrad@gmail.com
+[commit]
+    gpgsign = true
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
+[init]
+    defaultBranch = main
+[color]
+    ui = auto
+[alias]
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[core]
+    editor = code --wait
+[push]
+    autoSetupRemote = true
+    default = current
