@@ -1,0 +1,19 @@
+[gpg]
+    format = ssh
+[user]
+    signingkey = ~/.ssh/id_signing.pub
+    name = konradodwrot
+    email = odwrotkonrad@gmail.com
+[commit]
+    gpgsign = true
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
+[init]
+    defaultBranch = main
+[color]
+    ui = auto
+[push]
+    autoSetupRemote = true
+    default = current
+[core]
+    excludesfile = ~/.config/git/.gitignore_global
