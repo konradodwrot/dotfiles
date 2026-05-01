@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+typeset -rA plugins=(
+    nodejs    "https://github.com/asdf-vm/asdf-nodejs.git"
+    python    "https://github.com/danhper/asdf-python.git"
+    terraform "https://github.com/asdf-community/asdf-hashicorp.git"
+    kubectl   "https://github.com/asdf-community/asdf-kubectl.git"
+    kubectx   "https://gitlab.com/wt0f/asdf-kubectx.git"
+    pnpm      "https://github.com/jonathanmorley/asdf-pnpm.git"
+)
+
+for name url in ${(kv)plugins}; do
+    asdf plugin add "$name" "$url"
+done
+
+asdf install # install versions of tools from .tool-versions

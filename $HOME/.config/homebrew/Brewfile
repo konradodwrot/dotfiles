@@ -1,0 +1,13 @@
+brew "direnv"
+brew "git"
+brew "make"
+brew "tree"
+brew "uv"
+brew "fzf"
+brew "asdf"
+brew "gpg"
+brew "gawk"
+brew "jq"
+brew "yq"
+
+cask "ghostty"
