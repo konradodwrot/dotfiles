@@ -5,14 +5,13 @@
 
 ### --- BEGIN ZSH OPTIONS --- ###
 
-
+#> https://zsh.sourceforge.io/Doc/Release/Options.html
 typeset -a opts_disabled=(
-  AUTO_CD                      # disable auto cd; changing dirs must be explicit with a cd or similar
-  AUTO_NAME_DIRS               # disable auto aliasing directories (~dir)
-  BEEP                         # do not beep
-  CD_SILENT                    # no need to print pwd after cd
-  CLOBBER                      # '>' will not overwrite existing files, force with '>|'
-  CORRECT_ALL                  # unset correcting arguments, since shells assumes they have to be filenames
+  AUTO_CD                      #[D]? to avoid confusion, for better completion control
+  AUTO_NAME_DIRS               #[D]? to not create named dirs by accident
+  BEEP                         #? to reduce interruptions while working
+  CLOBBER                      #? to avoid accidental file overrides
+  CORRECT_ALL                  #? to avoid questions and streamline workflow #[O] not useful when advanced completions are on
   CSH_JUNKIE_HISTORY
   CSH_JUNKIE_LOOPS
   GLOB_SUBST                   # globs inside vars won't be interpretted e.g. search=**/*.txt echo $search; unless `~` is used e.g. echo $~search
@@ -45,6 +44,7 @@ set +o ${opts_disabled}
 
 
 typeset -a opts_enabled=(
+  CD_SILENT                    #? to reduce verbosity
   BSD_ECHO                     # make echo not interpret backslashes by default; use printf instead
   INTERACTIVE_COMMENTS         # enable comments in interactive shells
   KSH_OPTION_PRINT             # print all options on `` or `setopt`
