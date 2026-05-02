@@ -45,6 +45,7 @@ typeset -a opts_disabled=(
   SH_OPTION_LETTERS            #[DF] to have zsh as option reference
   SINGLE_LINE_ZLE              #[DF]
   SH_WORD_SPLIT                #[DF]
+  KSH_ARRAYS                   #[DF] #? because consistency with shell parameters is cool
 )
 set +o ${opts_disabled}
 
@@ -69,7 +70,6 @@ typeset -a opts_enabled=(
   HIST_VERIFY                  #? to allow edit history item before executing it
   HUP                          #[DF]
   INTERACTIVE_COMMENTS         #? to have robust copy/paste commands including comments
-  KSH_ARRAYS                   #? because array indexing from 0 is cool
   KSH_OPTION_PRINT             #? to show full list of options on `set -o``
   LOCAL_OPTIONS
   LOCAL_TRAPS
