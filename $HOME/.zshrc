@@ -15,7 +15,6 @@ typeset -a opts_disabled=(
   BSD_ECHO                     #[DF]
   CDABLE_VARS                  #[DF]
   CHASE_LINKS                  #[DF] #[O] predictability is important
-  CLOBBER                      #? to avoid accidental file overrides
   CORRECT                      #[O] reliance on completions should be enough
   CORRECT_ALL                  #? to avoid questions and streamline workflow #[O] not useful when advanced completions are on
   CSH_JUNKIE_HISTORY           #[DF]
@@ -47,7 +46,7 @@ typeset -a opts_disabled=(
   SH_WORD_SPLIT                #[DF]
   SINGLE_LINE_ZLE              #[DF]
 )
-set +o ${opts_disabled}
+for opt in ${opts_disabled}; set +o $opt
 
 
 typeset -a opts_enabled=(
@@ -80,8 +79,9 @@ typeset -a opts_enabled=(
   PROMPT_SUBST                 #? to enable advanced PS construction
   PUSHD_SILENT                 #? to reduce verbosity when changing dirs
   SHARE_HISTORY
+  CLOBBER                      #? to avoid accidental file overrides
 )
-set -o  ${opts_enabled}
+for opt in ${opts_enabled}; set -o $opt
 
 
 ### --- END ZSH OPTIONS --- ###
