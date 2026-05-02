@@ -8,7 +8,6 @@
 
 
 typeset -a opts_disabled=(
-  APPEND_HISTORY               #? appending to history is defined by SHARE_HISTORY opt
   AUTO_CD                      #[DF] #? to avoid confusion, for better completion control
   AUTO_NAME_DIRS               #[DF] #? to not create named dirs by accident
   BEEP                         #? to reduce interruptions
@@ -19,7 +18,6 @@ typeset -a opts_disabled=(
   CORRECT_ALL                  #? to avoid questions and streamline workflow #[O] not useful when advanced completions are on
   CSH_JUNKIE_HISTORY           #[DF]
   CSH_JUNKIE_LOOPS             #[DF]
-  EXTENDED_HISTORY             #[DF] #? SHARE_HISTORY controls history event format
   HIST_BEEP                    #[DF] #? to reduce interruptions
   HIST_EXPIRE_DUPS_FIRST       #[DF] #[O] history completeness and chronological order is important
   HIST_FIND_NO_DUPS            #[DF] #[O] history search predictability is important
@@ -31,8 +29,7 @@ typeset -a opts_disabled=(
   HIST_REDUCE_BLANKS           #[DF] #[O] history accuracy is important
   HIST_SAVE_NO_DUPS            #[DF] #[O] history completeness is important
   IGNORE_BRACES                #[DF] #[O] brace expansion is cool file{1,2}.txt > file1.txt file2.txt
-  INC_APPEND_HISTORY           #[DF] #? because SHARE_HISTORY is set and these are mutually exclusive options
-  INC_APPEND_HISTORY_TIME      #[DF] #? because SHARE_HISTORY is set and these are mutually exclusive options
+  INC_APPEND_HISTORY           #[DF]
   KSH_ARRAYS                   #[DF] #? because consistency with shell parameters is cool
   KSH_AUTOLOAD                 #[DF]
   KSH_GLOB                     #[DF]
@@ -45,11 +42,15 @@ typeset -a opts_disabled=(
   SH_OPTION_LETTERS            #[DF] to have zsh as option reference
   SH_WORD_SPLIT                #[DF]
   SINGLE_LINE_ZLE              #[DF]
+  SHARE_HISTORY                #[DF]
+  APPEND_HISTORY
 )
 for opt in ${opts_disabled}; set +o $opt
 
 
 typeset -a opts_enabled=(
+  EXTENDED_HISTORY
+  INC_APPEND_HISTORY_TIME
   AUTO_PUSHD                   #? to retain history of entered directories
   BAD_PATTERN                  #[DF]
   BANG_HIST                    #? to enable history search shortcuts: !!, !?, !n, !str
@@ -78,7 +79,6 @@ typeset -a opts_enabled=(
   PROMPT_PERCENT               #[DF] % is a special character in prompt expansion
   PROMPT_SUBST                 #? to enable advanced PS construction
   PUSHD_SILENT                 #? to reduce verbosity when changing dirs
-  SHARE_HISTORY
   CLOBBER                      #? to avoid accidental file overrides
 )
 for opt in ${opts_enabled}; set -o $opt
@@ -139,6 +139,7 @@ unset opts_disabled opts_enabled zsh_params
 
 . ${XDG_CONFIG_HOME}/zsh/.aliasrc
 
+fc -RI  #[I] loads history from $HISTFILE into shell
 
 ### --- BEGIN TOOLS --- ###
 
