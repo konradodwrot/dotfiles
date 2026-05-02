@@ -4,7 +4,6 @@
 ### --- BEGIN SETUP DIRS --- ###
 
 
-# set environment variables for common dirs
 typeset -A dirs_env=(
     ASDF_DATA_DIR       "${HOME}/.local/share/asdf"         # asdf installs tools here
     XDG_BIN_HOME        "${HOME}/.local/bin"                # xdg - bin recommendation
@@ -37,7 +36,6 @@ for k v in "${(@kv)dirs_named}"; hash -d "$k=$v"            # hash -d adds dirs 
 
 ### --- BEGIN SETUP ENVIRONMENT VARIABLES --- ###
 
-
 typeset -A env_vars=(
     ASDF_CONFIG_FILE    "${HOME}/.config/asdf/.asdfrc"
     LANG                "C.UTF-8"
@@ -49,10 +47,10 @@ typeset -A env_vars=(
     EDITOR              "vim"
 )
 env_vars+=( ${(kv)dirs_env} )
-for k v in "${(@kv)env_vars}"; typeset -gx "$k=$v"          # create environment variables
+for k v in "${(@kv)env_vars}"; export "$k=$v"
 
 
-typeset -U path=(                                           # array form of synced scalar PATH
+typeset -U path=(
     ${XDG_BIN_HOME}                                         # user bin
     /opt/homebrew/bin                                       # homebrew bin
     ${ASDF_DATA_DIR}/shims                                  # asdf bins

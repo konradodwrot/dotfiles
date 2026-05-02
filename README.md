@@ -2,6 +2,16 @@
 
 My configuration files
 
+## Configured Tools
+
+- zsh - https://zsh.sourceforge.io/
+- ssh - https://man7.org/linux/man-pages/man1/ssh.1.html
+- asdf - https://asdf-vm.com/
+- direnv - https://direnv.net/
+- ghostty - https://ghostty.org/
+- git - https://git-scm.com/
+- homebrew - https://brew.sh/
+
 ## Loading Configuration
 
 I use my own zsh bunch of scripts for loading dotfiles called `che`. It's optimized for minimal actions needed to store configuration remotely.
@@ -63,21 +73,21 @@ Example:
 AUTO_CD #? to avoid confusion, for better completion control
 ```
 
-### #[D] - Explicit Default Setting
+### #[DF] - Explicit Default Setting
 
 Notation:
 
 ```shell
-<subject> #[D]
+<subject> #[DF]
 ```
 
 Example:
 
 ```shell
-AUTO_NAME_DIRS #[D] - #? to not create named dirs by accident
+AUTO_NAME_DIRS #[DF] - #? to not create named dirs by accident
 ```
 
-### Opinion
+### #[O] - Opinion
 
 Notation:
 
@@ -91,6 +101,20 @@ Example:
 CORRECT_ALL #[O] not useful when advanced completions are on
 ```
 
+
+### #[I] - Info - Explanatory Information
+
+Notation:
+
+```shell
+<subject> #[I]
+```
+
+Example:
+
+```shell
+PS1  '%# '  #[I] # for root, % for non root
+```
 
 ## Contributions
 

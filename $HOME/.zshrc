@@ -4,83 +4,82 @@
 
 
 ### --- BEGIN ZSH OPTIONS --- ###
-
 #> https://zsh.sourceforge.io/Doc/Release/Options.html
+
+
 typeset -a opts_disabled=(
-  AUTO_CD                      #[D]? to avoid confusion, for better completion control
-  AUTO_NAME_DIRS               #[D]? to not create named dirs by accident
-  BEEP                         #? to reduce interruptions while working
+  AUTO_CD                      #[DF] #? to avoid confusion, for better completion control
+  AUTO_NAME_DIRS               #[DF] #? to not create named dirs by accident
+  BEEP                         #? to reduce interruptions
   CLOBBER                      #? to avoid accidental file overrides
   CORRECT_ALL                  #? to avoid questions and streamline workflow #[O] not useful when advanced completions are on
-  CSH_JUNKIE_HISTORY
-  CSH_JUNKIE_LOOPS
-  GLOB_SUBST                   # globs inside vars won't be interpretted e.g. search=**/*.txt echo $search; unless `~` is used e.g. echo $~search
-  GLOBAL_EXPORT                # disable exported function scoped parameters being global
-  HIST_BEEP                    # do not beep if history event is missing
-  HIST_EXPIRE_DUPS_FIRST
-  HIST_IGNORE_ALL_DUPS         # full history record
-  HIST_IGNORE_DUPS             # full history record
-  HIST_IGNORE_SPACE            # if command is prepended with a space write it down to history
-  HIST_LEX_WORDS
-  HIST_NO_FUNCTIONS            # full history record, including functions definitions
-  HIST_NO_STORE                # full history record, including 'history' command invocations
-  HIST_SAVE_NO_DUPS            # full history record
-  IGNORE_BRACES                # file{1,2}.txt is expanding to multiple args
-  INC_APPEND_HISTORY_TIME      # use SHARE_HISTORY instead
-  KSH_ARRAYS                   # $array will print all elems instead of first one; arrays are indexes starting from 1
-  KSH_AUTOLOAD                 # autoload - function files contains only body of a fuction; filename determines name of a function
-  KSH_GLOB                     # disable KSH-like globbing patterns; ^p -> negation; p## -> 1+ ; p# -> 0+ ; (p) -> 1
-  POSIX_BUILTINS               # short lived vars before command; command builtin ignores shell fns; exec can run fns; 
-  PROMPT_BANG                  # disable `!` history events in prompts
-  PUSHD_IGNORE_DUPS            # enable full directory history in directory stack
-  RM_STAR_SILENT               # rm with * will ask for confirmation to delete files
-  SH_FILE_EXPANSION            # ~ tilde expansion comes last; so other users home dirs are resolvable e.g. ~root -> /var/root
-  SH_GLOB                      # enable globbing symbols: | () <>
-  SH_OPTION_LETTERS            # use zsh short letter option mappings
-  SH_WORD_SPLIT                # disable unqoted parameter expansion, use arrays instead
-  SINGLE_LINE_ZLE              # enable multiline command editing
+  CSH_JUNKIE_HISTORY           #[DF]
+  CSH_JUNKIE_LOOPS             #[DF]
+  HIST_BEEP                    #[DF] #? to reduce interruptions
+  HIST_IGNORE_SPACE            #[DF] #[O] completeness is important
+  IGNORE_BRACES                #[DF] #[O] brace expansion is cool file{1,2}.txt > file1.txt file2.txt
+  INC_APPEND_HISTORY_TIME      #[DF] #? because SHARE_HISTORY is set and these are mutually exclusive options
+  KSH_AUTOLOAD                 #[DF]
+  KSH_GLOB                     #[DF]
+  POSIX_BUILTINS               #[DF]
+  PROMPT_BANG                  #[DF] #? because I do not currently use "!" in PS to access history event number
+  RM_STAR_SILENT               #[DF] #? to have safety net while removing files with glob containing *
+  SH_FILE_EXPANSION            #[DF]
+  SH_GLOB                      #[DF] to enable globbing symbols: | () <>
+  SH_OPTION_LETTERS            #[DF] to have zsh as option reference
+  SINGLE_LINE_ZLE              #[DF]
+  BSD_ECHO                     #[DF]
+  APPEND_HISTORY               #? appending to history is defined by SHARE_HISTORY opt
+  HIST_EXPIRE_DUPS_FIRST       #[DF] #[O] history completeness and chronological order is important
+  HIST_IGNORE_ALL_DUPS         #[DF] #[O] history completeness is important
+  HIST_IGNORE_DUPS             #[DF] #[O] history completeness is important
+  HIST_NO_STORE                #[DF] #[O] history completeness is important
+  HIST_NO_FUNCTIONS            #[DF] #[O] history completeness is important
+  HIST_SAVE_NO_DUPS            #[DF] #[O] history completeness is important
+  HIST_FIND_NO_DUPS            #[DF] #[O] history search predictability is important
+  HIST_REDUCE_BLANKS           #[DF] #[O] history accuracy is important
+  CHASE_LINKS                  #[DF] #[O] predictability is important
+  CDABLE_VARS                  #[DF]
+  CORRECT                      #[O] reliance on completions should be enough
+  INC_APPEND_HISTORY           #[DF] #? because SHARE_HISTORY is set and these are mutually exclusive options
+  EXTENDED_HISTORY             #[DF] #? SHARE_HISTORY controls history event format
+  PUSHD_IGNORE_DUPS            #[DF] #[O] dir history completeness is important
 )
 set +o ${opts_disabled}
 
 
 typeset -a opts_enabled=(
-  CD_SILENT                    #? to reduce verbosity
-  BSD_ECHO                     # make echo not interpret backslashes by default; use printf instead
-  INTERACTIVE_COMMENTS         # enable comments in interactive shells
-  KSH_OPTION_PRINT             # print all options on `` or `setopt`
-  MULTIOS                      # multiple inputs and outputs support without tee and cat; 
-  BARE_GLOB_QUAL               # last parantheses in globbing will be qualifier list e.g. (@) - symlink, (*) - executable
-  PROMPT_SUBST                 # enable expansions in PROMPT params, for prompt creation
-  APPEND_HISTORY
-  EXTENDED_HISTORY             # timestamps, how long command took to execute; history
-  HIST_ALLOW_CLOBBER           # > becomes >| , useful if NO_CLOBBER is set
-  HIST_FIND_NO_DUPS            # when searching I don't want to see dups
-  HIST_REDUCE_BLANKS           # remove redundant whitespace from commands
-  HIST_SAVE_BY_COPY            # .new .old rename
-  SHARE_HISTORY                # shared history
-  NOMATCH                      # error if glob returned nothing, overriden by CSH_NULL_GLOB
-  BAD_PATTERN                  # error if glob pattern is malformed
-  BG_NICE                      # background jobs have lower prio
-  NOTIFY                       # background jobs immediately reports status rather than waiting for next prompt
-  HUP                          # closing shell cause background jobs to be cleaned via SIGHUP
-  FUNCTION_ARG_ZERO            # $0 in function body contains function name rather than shell path
-  LOCAL_OPTIONS                # setting options inside a function is not visible to the outside
-  LOCAL_TRAPS                  # setting traps inside a function is bound to function lifetime
-  PROMPT_PERCENT               # % is a special character in prompt expansion
-  PROMPT_SUBST                 # expansions are performed in prompts
-  CSH_NULL_GLOB                # if using multiple globs one after another, do not report error if at least one return items
-  BANG_HIST                    # enable history shortcuts: !!, !?, !n, !str
-  HIST_VERIFY                  # add history item to the line editor before executing
-  INC_APPEND_HISTORY           # use SHARE_HISTORY instead
-  EXTENDED_GLOB                # enable ~ # ^ in globbing
-  CORRECT                      # try to correct cmd if invalid
-  CD_ABLE_VARS                 # enable auto expansion of var in cd e.g. cd /var/path, useful in e.g. cd NVM_DIR
-  HASH_CMDS                    # build index of commands from PATH for fast search
-  HASH_ALL                     # build index of commands from PATH for fast search
-  HASH_LIST_ALL                # build index of commands from PATH for fast search
-  CHASE_LINKS                  # when changing dirs, go to source if it's a symlink
-  AUTO_PUSHD                   # auto pushd when changing directories with cd
-  PUSHD_SILENT                 # disable printing directory stack after pushd/popd
+  SH_WORD_SPLIT                #? to have behavior similar to other shells; unquoted parameter expansion splits on whitespace
+  KSH_ARRAYS                   #? because array indexing from 0 is cool
+  HIST_LEX_WORDS               #[O] accuracy is more important than performance
+  GLOB_SUBST                   #? to enable writing globs in parameters
+  CD_SILENT                    #? to reduce verbosity when changing dirs
+  INTERACTIVE_COMMENTS         #? to have robust copy/paste commands including comments
+  KSH_OPTION_PRINT             #? to show full list of options on `set -o``
+  MULTIOS                      #[DF] to avoid using tee for multiple redirections
+  BARE_GLOB_QUAL               #[DF] #[O] file qualifier in glob is cool
+  PROMPT_SUBST                 #? to enable advanced PS construction
+  HIST_ALLOW_CLOBBER           #? to avoid conflict with CLOBBER option
+  HIST_SAVE_BY_COPY            #[DF]
+  SHARE_HISTORY
+  NOMATCH                      #[DF] #? if CSH_NULL_GLOB gets unset fallback to this option
+  BAD_PATTERN                  #[DF]
+  BG_NICE                      #[DF]
+  NOTIFY                       #[DF]
+  HUP                          #[DF]
+  FUNCTION_ARGZERO             #[DF]
+  LOCAL_OPTIONS
+  LOCAL_TRAPS
+  PROMPT_PERCENT               #[DF] % is a special character in prompt expansion
+  CSH_NULL_GLOB                #? more predictive multiple globs behavior passed to same argument list
+  BANG_HIST                    #? to enable history search shortcuts: !!, !?, !n, !str
+  HIST_VERIFY                  #? to allow edit history item before executing it
+  EXTENDED_GLOB                #[O] ~ # ^ symbols in globbing are cool
+  AUTO_PUSHD                   #? to retain history of entered directories
+  PUSHD_SILENT                 #? to reduce verbosity when changing dirs
+  GLOBAL_EXPORT                #[DF]
+  HASH_LIST_ALL                #[DF]
+  HASH_CMDS                    #[DF]
 )
 set -o  ${opts_enabled}
 
@@ -89,31 +88,31 @@ set -o  ${opts_enabled}
 
 
 ### --- BEGIN ZSH PARAMETERS --- ###
-
+#> https://zsh.sourceforge.io/Doc/Release/Parameters.html
 
 typeset -A zsh_params=(
     HISTFILE    "${XDG_STATE_HOME}/zsh/history"
     HISTSIZE    15_000
     SAVEHIST    10_000
-    PS1         '%# '                             # # for root, % for non root
-    RPS1        '%~ | %w | %T | %(?.✅.❌)'       # shortened pwd, date, time, last command status emoji
-    PS2         '> '                              # shell waits for input
-    PS4         '+ '                              # debugging prompt when XTRACE is set
+    PS1         '%# '                             #[I] # for root, % for non root
+    RPS1        '%~ | %w | %T | %(?.✅.❌)'       #[I] shortened pwd, date, time, last command status emoji
+    PS2         '> '                              #[I] shell waits for input
+    PS4         '+ '                              #[I] debugging prompt when XTRACE is set
 )
 for k v in "${(@kv)zsh_params}"; typeset "$k=$v" 
 
 
-typeset -U fpath                                  # array form of synced scalar FPATH
+typeset -U cdpath
+cdpath=(
+    .
+)
+
+
+typeset -U fpath
 fpath=(
     ${XDG_CONFIG_HOME}/zsh/functions
     ${ASDF_DATA_DIR}/completions
     ${fpath}
-)
-
-
-typeset -U cdpath                                 # array form of synced scalar CDPATH
-cdpath=(
-    .
 )
 
 
@@ -122,15 +121,14 @@ cdpath=(
 
 ### --- BEGIN ZSH OTHER --- ###
 
-
-# completions asdf
-[[ ! -s "${ASDF_DATA_DIR}/completions/_asdf" ]] && asdf completion zsh > "${ASDF_DATA_DIR}/completions/_asdf"
-
 autoload ${XDG_CONFIG_HOME}/zsh/functions/**(:t)
 autoload -Uz compinit && compinit
 
 
 ### --- END ZSH OTHER --- ###
+
+
+unset opts_disabled opts_enabled zsh_params
 
 
 ##### --- END ZSH --- #####
@@ -145,13 +143,18 @@ source ${XDG_CONFIG_HOME}/zsh/.aliasrc
 ### --- BEGIN TOOLS --- ###
 
 
-eval "$(/opt/homebrew/bin/brew shellenv)" # homebrew https://docs.brew.sh/Installation
+#> https://asdf-vm.com/guide/getting-started.html#_2-configure-asdf
+[[ ! -s "${ASDF_DATA_DIR}/completions/_asdf" ]] && asdf completion zsh > "${ASDF_DATA_DIR}/completions/_asdf"
 
 
-eval "$(direnv hook zsh)"                 # direnv https://direnv.net/docs/hook.html
+#> https://docs.brew.sh/Installation
+eval "$(/opt/homebrew/bin/brew shellenv)" 
 
+#> https://direnv.net/docs/hook.html
+eval "$(direnv hook zsh)"                 
 
-source <(fzf --zsh)                       # fzf
+#> https://github.com/junegunn/fzf#setting-up-shell-integration
+source <(fzf --zsh)                       
 
 
 ### --- END TOOLS --- ###
@@ -160,4 +163,3 @@ source <(fzf --zsh)                       # fzf
 ##### --- END CUSTOM --- #####
 
 
-unset opts_disabled opts_enabled zsh_params
