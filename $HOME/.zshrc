@@ -44,6 +44,7 @@ typeset -a opts_disabled=(
   SH_GLOB                      #[DF] to enable globbing symbols: | () <>
   SH_OPTION_LETTERS            #[DF] to have zsh as option reference
   SINGLE_LINE_ZLE              #[DF]
+  SH_WORD_SPLIT                #[DF]
 )
 set +o ${opts_disabled}
 
@@ -78,7 +79,6 @@ typeset -a opts_enabled=(
   PROMPT_PERCENT               #[DF] % is a special character in prompt expansion
   PROMPT_SUBST                 #? to enable advanced PS construction
   PUSHD_SILENT                 #? to reduce verbosity when changing dirs
-  SH_WORD_SPLIT                #? to have behavior similar to other shells; unquoted parameter expansion splits on whitespace
   SHARE_HISTORY
 )
 set -o  ${opts_enabled}
