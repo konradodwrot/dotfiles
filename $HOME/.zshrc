@@ -34,6 +34,7 @@ typeset -a opts_disabled=(
   IGNORE_BRACES                #[DF] #[O] brace expansion is cool file{1,2}.txt > file1.txt file2.txt
   INC_APPEND_HISTORY           #[DF] #? because SHARE_HISTORY is set and these are mutually exclusive options
   INC_APPEND_HISTORY_TIME      #[DF] #? because SHARE_HISTORY is set and these are mutually exclusive options
+  KSH_ARRAYS                   #[DF] #? because consistency with shell parameters is cool
   KSH_AUTOLOAD                 #[DF]
   KSH_GLOB                     #[DF]
   POSIX_BUILTINS               #[DF]
@@ -43,9 +44,8 @@ typeset -a opts_disabled=(
   SH_FILE_EXPANSION            #[DF]
   SH_GLOB                      #[DF] to enable globbing symbols: | () <>
   SH_OPTION_LETTERS            #[DF] to have zsh as option reference
-  SINGLE_LINE_ZLE              #[DF]
   SH_WORD_SPLIT                #[DF]
-  KSH_ARRAYS                   #[DF] #? because consistency with shell parameters is cool
+  SINGLE_LINE_ZLE              #[DF]
 )
 set +o ${opts_disabled}
 
