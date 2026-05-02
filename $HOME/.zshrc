@@ -137,7 +137,7 @@ unset opts_disabled opts_enabled zsh_params
 ##### --- BEGIN CUSTOM --- #####
 
 
-source ${XDG_CONFIG_HOME}/zsh/.aliasrc
+. ${XDG_CONFIG_HOME}/zsh/.aliasrc
 
 
 ### --- BEGIN TOOLS --- ###
@@ -154,7 +154,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(direnv hook zsh)"                 
 
 #> https://github.com/junegunn/fzf#setting-up-shell-integration
-source <(fzf --zsh)                       
+. <(fzf --zsh)                       
 
 
 ### --- END TOOLS --- ###
