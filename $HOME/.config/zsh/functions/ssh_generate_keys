@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 typeset -a ssh_keys=(
     ~/.ssh/id_access
     ~/.ssh/id_signing
