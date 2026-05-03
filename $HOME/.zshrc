@@ -47,7 +47,7 @@ typeset -a opts_disabled=(
   HIST_ALLOW_CLOBBER           #[D]
   HUP                          
 )
-for opt in ${opts_disabled}; set +o $opt
+for opt in ${opts_disabled}; unsetopt $opt
 
 
 typeset -a opts_enabled=(
@@ -80,7 +80,7 @@ typeset -a opts_enabled=(
   PUSHD_SILENT                 #? to reduce verbosity when changing dirs
   MONITOR
 )
-for opt in ${opts_enabled}; set -o $opt
+for opt in ${opts_enabled}; setopt $opt
 
 
 ### --- END ZSH OPTIONS --- ###
@@ -116,8 +116,11 @@ fpath=(
 ### --- END ZSH PARAMETERS --- ###
 ### --- BEGIN ZSH OTHER --- ###
 
-autoload ${XDG_CONFIG_HOME}/zsh/functions/**(:t)
-autoload -Uz compinit && compinit
+for f in ${XDG_CONFIG_HOME}/zsh/functions/**(:t); {
+  emulate zsh -LRc "autoload $f"
+}
+
+emulate zsh -LRc "autoload -Uz compinit" && compinit
 
 
 ### --- END ZSH OTHER --- ###

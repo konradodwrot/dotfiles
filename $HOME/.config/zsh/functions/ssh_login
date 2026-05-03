@@ -1,3 +1,5 @@
+emulate -L zsh
+
 typeset -r time="${1:-4h}"
 
 typeset -a ssh_keys=(
