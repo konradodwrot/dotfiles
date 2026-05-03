@@ -34,14 +34,6 @@ che clean all
 
 Configuration is annotated with comments to justify selection in following format:
 
-### Sections - Settings Grouping - BEGIN/END
-
-```shell
-##### --- BEGIN <SECTION> --- #####
-### --- BEGIN <SUB_SECTION> --- ###
-### --- END <SUB_SECTION> --- ###
-##### --- END <SECTION> --- #####
-```
 
 ### #> - Where can this be read about? 
 
