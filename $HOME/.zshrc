@@ -47,6 +47,7 @@ typeset -a opts_disabled=(
   GLOB_SUBST                   #[D] 
   GLOB_ASSIGN                  #[D]
   HIST_ALLOW_CLOBBER           #[D]
+  HUP                          
 )
 for opt in ${opts_disabled}; set +o $opt
 
@@ -69,7 +70,6 @@ typeset -a opts_enabled=(
   HIST_LEX_WORDS               #[O] accuracy is more important than performance
   HIST_SAVE_BY_COPY            #[DF]
   HIST_VERIFY                  #? to allow edit history item before executing it
-  HUP                          #[DF]
   INTERACTIVE_COMMENTS         #? to have robust copy/paste commands including comments
   KSH_OPTION_PRINT             #? to show full list of options on `set -o``
   LOCAL_OPTIONS
@@ -80,6 +80,7 @@ typeset -a opts_enabled=(
   PROMPT_PERCENT               #[DF] % is a special character in prompt expansion
   PROMPT_SUBST                 #? to enable advanced PS construction
   PUSHD_SILENT                 #? to reduce verbosity when changing dirs
+  MONITOR
 )
 for opt in ${opts_enabled}; set -o $opt
 
