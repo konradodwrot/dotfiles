@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 alias ga="git add ."
 alias gc="git commit -m"
 alias gp="git push"

@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 ##### --- BEGIN ZSH --- #####
 ### --- BEGIN ZSH OPTIONS --- ###
 #> https://zsh.sourceforge.io/Doc/Release/Options.html
@@ -132,7 +130,7 @@ unset opts_disabled opts_enabled zsh_params
 ##### --- BEGIN CUSTOM --- #####
 
 
-. ${XDG_CONFIG_HOME}/zsh/aliases.sh
+. ${XDG_CONFIG_HOME}/zsh/rc.d/aliases.zsh
 
 fc -RI  #[I] loads history from $HISTFILE into shell
 
