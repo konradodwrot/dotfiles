@@ -44,6 +44,8 @@ typeset -a opts_disabled=(
   APPEND_HISTORY
   GLOBAL_RCS
   CLOBBER                      #? to avoid accidental file overrides
+  GLOB_SUBST                   #[D] 
+  GLOB_ASSIGN                  #[D]
 )
 for opt in ${opts_disabled}; set +o $opt
 
@@ -60,7 +62,6 @@ typeset -a opts_enabled=(
   CSH_NULL_GLOB                #? more predictive multiple globs behavior passed to same argument list
   EXTENDED_GLOB                #[O] ~ # ^ symbols in globbing are cool
   FUNCTION_ARGZERO             #[DF]
-  GLOB_SUBST                   #? to enable writing globs in parameters
   GLOBAL_EXPORT                #[DF]
   HASH_CMDS                    #[DF]
   HASH_LIST_ALL                #[DF]
