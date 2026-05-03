@@ -46,6 +46,7 @@ typeset -a opts_disabled=(
   CLOBBER                      #? to avoid accidental file overrides
   GLOB_SUBST                   #[D] 
   GLOB_ASSIGN                  #[D]
+  HIST_ALLOW_CLOBBER           #[D]
 )
 for opt in ${opts_disabled}; set +o $opt
 
@@ -65,7 +66,6 @@ typeset -a opts_enabled=(
   GLOBAL_EXPORT                #[DF]
   HASH_CMDS                    #[DF]
   HASH_LIST_ALL                #[DF]
-  HIST_ALLOW_CLOBBER           #? to avoid conflict with CLOBBER option
   HIST_LEX_WORDS               #[O] accuracy is more important than performance
   HIST_SAVE_BY_COPY            #[DF]
   HIST_VERIFY                  #? to allow edit history item before executing it
