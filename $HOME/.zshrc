@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 
 ##### --- BEGIN ZSH --- #####
-
-
 ### --- BEGIN ZSH OPTIONS --- ###
 #> https://zsh.sourceforge.io/Doc/Release/Options.html
 
@@ -44,6 +42,8 @@ typeset -a opts_disabled=(
   SINGLE_LINE_ZLE              #[DF]
   SHARE_HISTORY                #[DF]
   APPEND_HISTORY
+  GLOBAL_RCS
+  CLOBBER                      #? to avoid accidental file overrides
 )
 for opt in ${opts_disabled}; set +o $opt
 
@@ -79,14 +79,11 @@ typeset -a opts_enabled=(
   PROMPT_PERCENT               #[DF] % is a special character in prompt expansion
   PROMPT_SUBST                 #? to enable advanced PS construction
   PUSHD_SILENT                 #? to reduce verbosity when changing dirs
-  CLOBBER                      #? to avoid accidental file overrides
 )
 for opt in ${opts_enabled}; set -o $opt
 
 
 ### --- END ZSH OPTIONS --- ###
-
-
 ### --- BEGIN ZSH PARAMETERS --- ###
 #> https://zsh.sourceforge.io/Doc/Release/Parameters.html
 
@@ -117,8 +114,6 @@ fpath=(
 
 
 ### --- END ZSH PARAMETERS --- ###
-
-
 ### --- BEGIN ZSH OTHER --- ###
 
 autoload ${XDG_CONFIG_HOME}/zsh/functions/**(:t)
@@ -132,12 +127,10 @@ unset opts_disabled opts_enabled zsh_params
 
 
 ##### --- END ZSH --- #####
-
-
 ##### --- BEGIN CUSTOM --- #####
 
 
-. ${XDG_CONFIG_HOME}/zsh/.aliasrc
+. ${XDG_CONFIG_HOME}/zsh/aliases.sh
 
 fc -RI  #[I] loads history from $HISTFILE into shell
 
@@ -159,8 +152,4 @@ eval "$(direnv hook zsh)"
 
 
 ### --- END TOOLS --- ###
-
-
 ##### --- END CUSTOM --- #####
-
-

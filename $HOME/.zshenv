@@ -1,6 +1,4 @@
 #!/usr/bin/env zsh
-
-
 ### --- BEGIN SETUP DIRS --- ###
 
 
@@ -32,8 +30,6 @@ for k v in "${(@kv)dirs_named}"; hash -d "$k=$v"            # hash -d adds dirs 
 
 
 ### --- END SETUP DIRS --- ###
-
-
 ### --- BEGIN SETUP ENVIRONMENT VARIABLES --- ###
 
 typeset -A env_vars=(
