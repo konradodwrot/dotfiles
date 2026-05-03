@@ -51,7 +51,11 @@ typeset -U path=(
     /opt/homebrew/bin                                       # homebrew bin
     ${ASDF_DATA_DIR}/shims                                  # asdf bins
     /opt/homebrew/share/google-cloud-sdk/bin                # gcloud bin
-    ${path}
+    /usr/local/bin
+    /usr/bin
+    /usr/sbin
+    /bin
+    /sbin
 )
 
 
