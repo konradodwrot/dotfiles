@@ -76,7 +76,7 @@ Notation:
 Example:
 
 ```shell
-AUTO_NAME_DIRS #[DF] - #? to not create named dirs by accident
+AUTO_NAME_DIRS #[DF]
 ```
 
 ### #[O] - Opinion
@@ -84,7 +84,7 @@ AUTO_NAME_DIRS #[DF] - #? to not create named dirs by accident
 Notation:
 
 ```shell
-setting #[O] <opinion>
+<subject> #[O] <opinion>
 ```
 
 Example:
