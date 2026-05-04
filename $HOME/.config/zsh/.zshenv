@@ -40,6 +40,7 @@ typeset -A env_vars=(
     LC_MESSAGES         "C.UTF-8"
     LC_NUMERIC          "C.UTF-8"
     LC_TIME             "C.UTF-8"
+    ZDOTDIR             "${HOME}/.config/zsh"
 )
 env_vars+=( ${(kv)dirs_env} )
 for k v in "${(@kv)env_vars}"; export "$k=$v"
