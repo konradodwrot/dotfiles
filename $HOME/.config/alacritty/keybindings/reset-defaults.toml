@@ -138,7 +138,7 @@ bindings = [
     { key = "W", mods = "Command", action = "ReceiveChar" },
     { key = "N", mods = "Command", action = "ReceiveChar" },
     { key = "T", mods = "Command", action = "ReceiveChar" },
-    { key = "F", mods = "Command|Control", action = "ReceiveChar" },
+    # { key = "F", mods = "Command|Control", action = "ReceiveChar" },
     { key = "F", mods = "Command", mode = "~Search", action = "ReceiveChar" },
     { key = "B", mods = "Command", mode = "~Search", action = "ReceiveChar" },
     { key = "]", mods = "Command|Shift", action = "ReceiveChar" },

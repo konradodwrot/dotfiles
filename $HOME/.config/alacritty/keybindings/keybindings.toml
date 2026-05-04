@@ -13,5 +13,8 @@ bindings = [
     { key = "Enter", mods = "Shift", mode = "Search", action = "SearchFocusPrevious" },
     # font size
     { key = "=", mods = "Command", action="IncreaseFontSize" },
-    { key = "-", mods = "Command", action="DecreaseFontSize" }
+    { key = "-", mods = "Command", action="DecreaseFontSize" },
+    #
+    { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
+
 ]

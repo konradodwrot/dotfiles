@@ -10,12 +10,13 @@ import = [
 
 [window]
 padding = { x = 3, y = 3 }
-decorations = "None"
+decorations = "Buttonless"
 opacity = 0.8
 blur = true
 title = "terminal"
-level = "AlwaysOnTop"
+level = "Normal"
 option_as_alt = "OnlyLeft"
+
 
 [scrolling]
 history = 100000
