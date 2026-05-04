@@ -1,8 +1,40 @@
 [general]
-
 live_config_reload = true
+import = [
+    "~/.config/alacritty/themes/seoul256-light.toml",
+    "~/.config/alacritty/keybindings/reset-defaults.toml",
+    "~/.config/alacritty/keybindings/keybindings.toml"
+]
+
+[window]
+padding = { x = 3, y = 3 }
+decorations = "None"
+opacity = 0.8
+blur = true
+title = "terminal"
+level = "AlwaysOnTop"
+option_as_alt = "OnlyLeft"
+
+[scrolling]
+history = 100000
+multiplier = 2
+
+[font]
+normal = {family = "SauceCodePro Nerd Font Mono", style = "Regular"}
+size = 18
+
+[selection]
+semantic_escape_chars = ""
+save_to_clipboard = false
+
+[cursor]
+style = { shape = "Beam", blinking = "Off"}
+unfocused_hollow = false
+thickness = 0.5
 
 [terminal]
-
 # TODO: templatize hardcoded HOME directory
 shell = { program = "/Users/konradodwrot/.local/bin/zsh", args = ["--login", "--no-globalrcs"]}
+
+[hints]
+enabled = []

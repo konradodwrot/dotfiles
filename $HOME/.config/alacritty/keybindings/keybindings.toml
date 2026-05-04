@@ -1,0 +1,15 @@
+[keyboard]
+bindings = [
+    # copy paste
+    { key = "Paste", action = "Paste" },
+    { key = "Copy", action = "Copy" },
+    # search
+    { key = "F", mods = "Command", mode = "~Search", action="SearchForward" },
+    { key = "Escape", mode = "Search", action = "SearchCancel" },
+    { key = "Backspace", mods = "Alt", mode = "Search", action = "SearchDeleteWord" },
+    { key = "Enter", mode = "Search", action = "SearchFocusNext" },
+    { key = "Enter", mods = "Shift", mode = "Search", action = "SearchFocusPrevious" },
+    # font size
+    { key = "=", mods = "Command", action="IncreaseFontSize" },
+    { key = "-", mods = "Command", action="DecreaseFontSize" },
+]

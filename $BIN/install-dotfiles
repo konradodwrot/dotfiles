@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+emulate -L zsh
+
+
+# make config directories
+
+
+# $BIN source = ~dotfiles/$BIN/*; $BIN target = ${HOME}/.local/bin
+# $HOME source = ~dotfiles/$HOME/*; $HOME target = ${HOME}/*
+
+
+# 1. get all directories from ~dotfiles/$BIN/* and ~dotfiles/$HOME/* recursively
+# 2.
+
+
+
+
+# make links
+
