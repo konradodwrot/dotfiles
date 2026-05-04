@@ -9,5 +9,6 @@ brew "gpg"
 brew "gawk"
 brew "jq"
 brew "yq"
+brew "tmux"
 
 cask "alacritty"
