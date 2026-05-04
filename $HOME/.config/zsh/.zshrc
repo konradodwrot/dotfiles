@@ -1,4 +1,3 @@
-
 #[I] source all files from zsh/rc.d in ascending by name order
 for rc in ${XDG_CONFIG_HOME}/zsh/rc.d/*.zsh(on); {
   . $rc

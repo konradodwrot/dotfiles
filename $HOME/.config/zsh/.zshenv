@@ -1,6 +1,3 @@
-### --- BEGIN SETUP DIRS --- ###
-
-
 typeset -A dirs_env=(
     ASDF_DATA_DIR       "${HOME}/.local/share/asdf"         # asdf installs tools here
     XDG_BIN_HOME        "${HOME}/.local/bin"                # xdg - bin recommendation
@@ -26,10 +23,6 @@ typeset -A dirs_named=(
     state       "${HOME}/.local/state"                      # cd ~state
 )
 for k v in "${(@kv)dirs_named}"; hash -d "$k=$v"            # hash -d adds dirs to cd with ~name
-
-
-### --- END SETUP DIRS --- ###
-### --- BEGIN SETUP ENVIRONMENT VARIABLES --- ###
 
 typeset -A env_vars=(
     ASDF_CONFIG_FILE    "${HOME}/.config/asdf/.asdfrc"
@@ -57,9 +50,6 @@ typeset -U path=(
     /bin
     /sbin
 )
-
-
-### --- END SETUP ENVIRONMENT VARIABLES --- ###
 
 
 unset dirs_env dirs_other dirs_named env_vars

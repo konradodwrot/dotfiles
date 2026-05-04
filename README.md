@@ -51,18 +51,18 @@ Example:
 typeset -a opts_disabled=(
 ```
 
-### #? - Why why was this particular setting chosen?
+### #[?] - Why why was this particular setting chosen?
 
 Notation:
 
 ```shell
-<subject> #? <justification>
+<subject> #[?] <justification>
 ```
 
 Example:
 
 ```shell
-AUTO_CD #? to avoid confusion, for better completion control
+AUTO_CD #[?] to avoid confusion, for better completion control
 ```
 
 ### #[DF] - Explicit Default Setting
