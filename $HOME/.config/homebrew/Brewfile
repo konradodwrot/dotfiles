@@ -10,4 +10,4 @@ brew "gawk"
 brew "jq"
 brew "yq"
 
-cask "ghostty"
+cask "alacritty"

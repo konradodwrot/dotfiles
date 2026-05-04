@@ -1,0 +1,9 @@
+#!/bin/zsh
+# [I] purpose of this wrapper is to set ZDOTDIR for zsh to store all zsh config 
+# including .zshenv in $XDG_CONFIG_HOME/zsh. If it was defined in .zshenv 
+# shell would pick it after .zshenv is loaded, and it would need to be stored in
+# default location $HOME/.zshenv
+
+export ZDOTDIR=${HOME}/.config/zsh
+
+exec /bin/zsh "$@"

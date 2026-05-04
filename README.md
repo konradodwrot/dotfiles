@@ -8,7 +8,7 @@ My configuration files
 - ssh - https://man7.org/linux/man-pages/man1/ssh.1.html
 - asdf - https://asdf-vm.com/
 - direnv - https://direnv.net/
-- ghostty - https://ghostty.org/
+- alacritty - https://alacritty.org/
 - git - https://git-scm.com/
 - homebrew - https://brew.sh/
 
