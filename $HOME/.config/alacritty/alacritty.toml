@@ -8,6 +8,11 @@ import = [
     "~/.config/alacritty/keybindings/keybindings.toml"
 ]
 
+[env]
+SHELL="/bin/zsh"
+# TODO: templatize hardcoded HOME directory
+ZDOTDIR="/Users/konradodwrot/.config/zsh"
+
 [window]
 padding = { x = 3, y = 3 }
 decorations = "Buttonless"
@@ -36,8 +41,8 @@ unfocused_hollow = false
 thickness = 0.5
 
 [terminal]
-# TODO: templatize hardcoded HOME directory
-shell = { program = "/Users/konradodwrot/.local/bin/zsh", args = ["--login", "--no-globalrcs"]}
+
+shell = { program = "/bin/zsh", args = ["--login", "--no-globalrcs"]}
 
 [hints]
 enabled = []
