@@ -16,5 +16,7 @@ bindings = [
     { key = "-", mods = "Command", action="DecreaseFontSize" },
     #
     { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
-
+    { key = "PageUp", action = "ScrollHalfPageUp" },
+    { key = "PageDown", action = "ScrollHalfPageDown" },
+    { key = "W", mods="Shift|Command", action = "Quit" },
 ]
