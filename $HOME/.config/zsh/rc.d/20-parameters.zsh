@@ -7,7 +7,6 @@ typeset -A zsh_params=(
     PS1         '%# '                             #[I] # for root, % for non root
     PS2         '> '                              #[I] shell waits for input
     PS4         '+ '                              #[I] debugging prompt when XTRACE is set
-    RPS1        '%~ | %w | %T | %(?.✅.❌)'       #[I] shortened pwd, date, time, last command status emoji
     SAVEHIST    10_000
 )
 for k v in "${(@kv)zsh_params}"; typeset "$k=$v" 

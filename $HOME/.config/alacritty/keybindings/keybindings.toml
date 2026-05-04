@@ -14,9 +14,20 @@ bindings = [
     # font size
     { key = "=", mods = "Command", action="IncreaseFontSize" },
     { key = "-", mods = "Command", action="DecreaseFontSize" },
-    #
+
     { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
     { key = "PageUp", action = "ScrollHalfPageUp" },
     { key = "PageDown", action = "ScrollHalfPageDown" },
     { key = "W", mods="Shift|Command", action = "Quit" },
+    { key = "N", mods = "Command", action = "CreateNewWindow" },
+
+    # tmux map, prefix = ^B
+    { key = "T",          mods = "Command",     chars = "\u0002t"        }, # split window - new pane
+    { key = "W",          mods = "Command",     chars = "\u0002w"        }, # kill pane
+    { key = "ArrowRight", mods = "Command|Alt", chars = "\u0002\u001B[C" }, # pane navigation right
+    { key = "ArrowLeft",  mods = "Command|Alt", chars = "\u0002\u001B[D" }, # pane navigation left
+    { key = "ArrowDown",  mods = "Command|Alt", chars = "\u0002\u001B[B" }, # pane navigation down
+    { key = "ArrowUp",    mods = "Command|Alt", chars = "\u0002\u001B[A" }, # pane navigation up
+    { key = "=",          mods = "Command|Alt", chars = "\u0002p"        }, # expand pane
+    { key = "-",          mods = "Command|Alt", chars = "\u0002m"        }, # bring back layout (revert expand pane)
 ]
