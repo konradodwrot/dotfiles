@@ -43,7 +43,7 @@ typeset -a opts_disabled=(
   GLOB_SUBST                   #[D] 
   GLOB_ASSIGN                  #[D]
   HIST_ALLOW_CLOBBER           #[D]
-  HUP                          
+  HUP
 )
 for opt in ${opts_disabled}; unsetopt $opt
 

@@ -27,15 +27,15 @@ for k v in "${(@kv)dirs_named}"; hash -d "$k=$v"            # hash -d adds dirs 
 typeset -A env_vars=(
     ASDF_CONFIG_FILE    "${HOME}/.config/asdf/.asdfrc"
     EDITOR              "vim"
-    VISUAL              "vim"
+    FCEDIT              "vim"
     LANG                "C.UTF-8"
     LC_COLLATE          "pl_PL.UTF-8"
     LC_CTYPE            "C.UTF-8"
     LC_MESSAGES         "C.UTF-8"
     LC_NUMERIC          "C.UTF-8"
     LC_TIME             "C.UTF-8"
+    VISUAL              "vim"
     ZDOTDIR             "${HOME}/.config/zsh"
-    FCEDIT              "vim"
 )
 env_vars+=( ${(kv)dirs_env} )
 for k v in "${(@kv)env_vars}"; export "$k=$v"
