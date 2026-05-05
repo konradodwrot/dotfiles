@@ -9,3 +9,5 @@ alias bu="brew update && brew upgrade"
 alias ssh_show_config="ssh -G localhost"
 
 alias stat_h='stat -f "%HT | %A | %u(%Su):%g(%Sg) | %z bytes | %N"'
+
+alias hist_refresh="fc -RL"

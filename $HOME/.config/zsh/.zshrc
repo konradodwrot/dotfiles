@@ -3,10 +3,6 @@ for rc in ${XDG_CONFIG_HOME}/zsh/rc.d/*.zsh(on); {
   . $rc
 }
 
-#[I] loads history from $HISTFILE into shell
-fc -RI
-
-
 #> https://asdf-vm.com/guide/getting-started.html#_2-configure-asdf
 [[ ! -s "${ASDF_DATA_DIR}/completions/_asdf" ]] && asdf completion zsh > "${ASDF_DATA_DIR}/completions/_asdf"
 
