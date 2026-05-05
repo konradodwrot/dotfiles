@@ -4,7 +4,7 @@ alias gp="git push"
 alias gr="git remote -v"
 
 alias bl="brew list"
-alias bu="brew update"
+alias bu="brew update && brew upgrade"
 
 alias ssh_show_config="ssh -G localhost"
 

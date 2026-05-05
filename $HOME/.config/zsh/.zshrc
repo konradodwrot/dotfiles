@@ -20,7 +20,5 @@ eval "$(direnv hook zsh)"
 #> https://github.com/junegunn/fzf#setting-up-shell-integration
 . <(fzf --zsh)                       
 
-
-#[I] alacritty, macOS only
-xattr -d -r com.apple.quarantine /Applications/Alacritty.app
-xattr -d -r com.apple.quarantine /opt/homebrew/bin/alacritty
+## load macos specific config TODO: this should not run .zshrc load
+is_macos && load_macos_config
