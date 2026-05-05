@@ -34,7 +34,12 @@ bindings = [
     # zsh
     { key = "ArrowRight", mods = "Command",       chars = "\u009E\u2192" }, 
     { key = "ArrowLeft",  mods = "Command",       chars = "\u009E\u2190" }, 
+    { key = "ArrowDown",  mods = "Command",       chars = "\u009E\u2193" }, 
+    { key = "ArrowUp",    mods = "Command",       chars = "\u009E\u2191" }, 
     { key = "Z",          mods = "Command",       chars = "\u009Ez" }, 
     { key = "Z",          mods = "Command|Shift", chars = "\u009EZ" }, 
     { key = "X",          mods = "Command",       chars = "\u009Ex" },
+    { key = "Enter",      mods = "Shift",         chars = "\u001B\u000D" },
+    { key = "Backspace",  mods = "Command",       chars = "\u009E\u232B" },
+    { key = "Delete",     mods = "Command",       chars = "\u009E\u2421" },
 ]
