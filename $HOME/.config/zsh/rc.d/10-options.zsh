@@ -45,7 +45,7 @@ typeset -a opts_disabled=(
   HIST_ALLOW_CLOBBER           #[D]
   HUP
 )
-for opt in ${opts_disabled}; unsetopt $opt
+for opt in ${opts_disabled}; unsetopt ${opt}
 
 
 typeset -a opts_enabled=(
@@ -78,7 +78,7 @@ typeset -a opts_enabled=(
   PUSHD_SILENT                 #[?] to reduce verbosity when changing dirs
   MONITOR
 )
-for opt in ${opts_enabled}; setopt $opt
+for opt in ${opts_enabled}; setopt ${opt}
 
 
 unset opts_disabled opts_enabled

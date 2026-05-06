@@ -1,3 +1,5 @@
+#> key definitions - https://docs.rs/winit/latest/winit/keyboard/enum.NamedKey.html
+
 [keyboard]
 bindings = [
     # copy paste
@@ -54,9 +56,13 @@ bindings = [
     { key = "Delete", chars = "⌘␡", mods = "Command" },
     { key = "Delete", chars = "⌥␡", mods = "Alt" },
 
-    { key = "Backspace", chars = "⌘⌫", mods = "Command" },
-    { key = "Backspace", chars = "⌫" },
-    { key = "Backspace", chars = "⌥⌫", mods = "Alt" },
+    { key = "Backspace", chars = "\b" },
+    { key = "Backspace", chars = "⌘\b", mods = "Command" },
+    { key = "Backspace", chars = "⌥\b", mods = "Alt" },
+
+    { key = "Numpad0", chars = "\u0013" },         # ^S - Suspend
+    { key = "NumpadSubtract", chars = "\u0011" },  # ^Q - Quit
+    { key = "NumpadEnter", chars = "\u0001" },     # ^A - Status
 
     ## other
     { key = "Z", chars = "⌘z", mods = "Command" },
