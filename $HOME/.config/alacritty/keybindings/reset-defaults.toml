@@ -117,7 +117,7 @@ bindings = [
     { key = "-", mods = "Control", action = "ReceiveChar" },
     { key = "NumpadSubtract", mods = "Control", action = "ReceiveChar" },
     # Windows Only
-    { key = "Enter", mods = "Alt", action = "ReceiveChar" },
+    # { key = "Enter", mods = "Alt", action = "ReceiveChar" },
     # MacOS Only
     { key = "K", mods = "Command", mode = "~Vi|~Search", action = "ReceiveChar" },
     { key = "K", mods = "Command", mode = "~Vi|~Search", action = "ReceiveChar" },

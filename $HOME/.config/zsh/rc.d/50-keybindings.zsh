@@ -1,35 +1,45 @@
-bindkey -N keys
+bindkey -N key_map
 
-bindkey -M keys -R "\M-^@"-"\M-^?" self-insert
-bindkey -M keys -R " "-"~" self-insert
-bindkey -M keys "^[[200~" bracketed-paste
+# unicode modifiers
+# ⌘ - command
+# ⌥ - alt
+# ⇧ - shift
 
-bindkey -M keys "^[[A" up-line-or-history                      # up
-bindkey -M keys $'\u009E\u2191' beginning-of-buffer-or-history # command + up
-bindkey -M keys "^[[B" down-line-or-history                    # bottom
-bindkey -M keys $'\u009E\u2193' end-of-buffer-or-history       # command + bottom
-bindkey -M keys "^[[C" forward-char                            # left
-bindkey -M keys "^[[D" backward-char                           # right
-bindkey -M keys "^M" accept-line                               # enter
-bindkey -M keys $'\u001b\u000d' self-insert-unmeta             # shift + enter = enter new line in prompt
+bindkey -M key_map -R "^@"-"~" self-insert
+bindkey -M key_map "^[[200~" bracketed-paste
 
-bindkey -M keys "^?" backward-delete-char                      # backspace
-bindkey -M keys "^[[3~" delete-char                            # del
-bindkey -M keys "^[^?" backward-delete-word                    # alt + backspace
-bindkey -M keys "^[[3;3~" delete-word                          # alt + del
-bindkey -M keys $'\u009E\u232B' backward-kill-line             # Command + backspace
-bindkey -M keys $'\u009E\u2421' kill-line                      # Command + del
-bindkey -M keys "^[[1;3D" vi-backward-word                     # alt + left
-bindkey -M keys "^[[1;3C" vi-forward-word                      # alt + right
+# arrows
+bindkey -M key_map "↑" up-line-or-history                        
+bindkey -M key_map "⌘↑" beginning-of-buffer-or-history 
+bindkey -M key_map "↓" down-line-or-history                    
+bindkey -M key_map "⌘↓" end-of-buffer-or-history       
+bindkey -M key_map "→" forward-char                            
+bindkey -M key_map "←" backward-char                           
 
-bindkey -M keys $'\u009E\u2192' vi-end-of-line                 # Command + Right
-bindkey -M keys $'\u009E\u2190' vi-beginning-of-line           # Command + Left
-bindkey -M keys $'\u009Ez' undo                                # Command + z
-bindkey -M keys $'\u009EZ' redo                                # Command + Shift + z
-bindkey -M keys $'\u009Ex' kill-buffer                         # Command + x
+bindkey -M key_map "⌥←" vi-backward-word              
+bindkey -M key_map "⌥→" vi-forward-word  
 
-bindkey -M keys "^I" expand-or-complete                        # Tab
+bindkey -M key_map "⌘→" vi-end-of-line             
+bindkey -M key_map "⌘←" vi-beginning-of-line  
 
-bindkey -A keys main
+# deletions
+bindkey -M key_map "⌫" backward-delete-char                      
+bindkey -M key_map "⌘⌫" backward-kill-line             
+bindkey -M key_map "⌥⌫" backward-delete-word
 
-WORDCHARS=""
+bindkey -M key_map "␡" delete-char                               
+bindkey -M key_map "⌥␡" delete-word                          
+bindkey -M key_map "⌘␡" kill-line
+
+# other
+bindkey -M key_map "⌘z" undo                 
+bindkey -M key_map "⌘⇧z" redo        
+bindkey -M key_map "⌘x" kill-buffer
+
+bindkey -M key_map "\r" accept-line     
+bindkey -M key_map "\f" accept-line    
+bindkey -M key_map "\t" expand-or-complete 
+
+bindkey -A key_map main
+
+WORDCHARS="" # words splits on everything

@@ -6,40 +6,64 @@ bindings = [
     { key = "Copy", action = "Copy" },
     { key = "C", mods = "Command", action = "Copy" },
     # search
-    { key = "F", mods = "Command", mode = "~Search", action="SearchForward" },
+    { key = "F", mods = "Command", mode = "~Search", action = "SearchForward" },
     { key = "Escape", mode = "Search", action = "SearchCancel" },
     { key = "Backspace", mods = "Alt", mode = "Search", action = "SearchDeleteWord" },
     { key = "Enter", mode = "Search", action = "SearchFocusNext" },
     { key = "Enter", mods = "Shift", mode = "Search", action = "SearchFocusPrevious" },
     # font size
-    { key = "=", mods = "Command", action="IncreaseFontSize" },
-    { key = "-", mods = "Command", action="DecreaseFontSize" },
+    { key = "=", mods = "Command", action = "IncreaseFontSize" },
+    { key = "-", mods = "Command", action = "DecreaseFontSize" },
 
     { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
     { key = "PageUp", action = "ScrollHalfPageUp" },
     { key = "PageDown", action = "ScrollHalfPageDown" },
-    { key = "W", mods="Shift|Command", action = "Quit" },
+    { key = "W", mods = "Shift|Command", action = "Quit" },
     { key = "N", mods = "Command", action = "CreateNewWindow" },
 
     # tmux map, prefix = ^B
-    { key = "T",          mods = "Command",     chars = "\u0002t"        }, # split window - new pane
-    { key = "W",          mods = "Command",     chars = "\u0002w"        }, # kill pane
+    { key = "T", mods = "Command", chars = "\u0002t" },                     # split window - new pane
+    { key = "W", mods = "Command", chars = "\u0002w" },                     # kill pane
     { key = "ArrowRight", mods = "Command|Alt", chars = "\u0002\u001B[C" }, # pane navigation right
-    { key = "ArrowLeft",  mods = "Command|Alt", chars = "\u0002\u001B[D" }, # pane navigation left
-    { key = "ArrowDown",  mods = "Command|Alt", chars = "\u0002\u001B[B" }, # pane navigation down
-    { key = "ArrowUp",    mods = "Command|Alt", chars = "\u0002\u001B[A" }, # pane navigation up
-    { key = "=",          mods = "Command|Alt", chars = "\u0002p"        }, # expand pane
-    { key = "-",          mods = "Command|Alt", chars = "\u0002m"        }, # bring back layout (revert expand pane)
+    { key = "ArrowLeft", mods = "Command|Alt", chars = "\u0002\u001B[D" },  # pane navigation left
+    { key = "ArrowDown", mods = "Command|Alt", chars = "\u0002\u001B[B" },  # pane navigation down
+    { key = "ArrowUp", mods = "Command|Alt", chars = "\u0002\u001B[A" },    # pane navigation up
+    { key = "=", mods = "Command|Alt", chars = "\u0002p" },                 # expand pane
+    { key = "-", mods = "Command|Alt", chars = "\u0002m" },                 # bring back layout (revert expand pane)
 
     # zsh
-    { key = "ArrowRight", mods = "Command",       chars = "\u009E\u2192" }, 
-    { key = "ArrowLeft",  mods = "Command",       chars = "\u009E\u2190" }, 
-    { key = "ArrowDown",  mods = "Command",       chars = "\u009E\u2193" }, 
-    { key = "ArrowUp",    mods = "Command",       chars = "\u009E\u2191" }, 
-    { key = "Z",          mods = "Command",       chars = "\u009Ez" }, 
-    { key = "Z",          mods = "Command|Shift", chars = "\u009EZ" }, 
-    { key = "X",          mods = "Command",       chars = "\u009Ex" },
-    { key = "Enter",      mods = "Shift",         chars = "\u001B\u000D" },
-    { key = "Backspace",  mods = "Command",       chars = "\u009E\u232B" },
-    { key = "Delete",     mods = "Command",       chars = "\u009E\u2421" },
+
+    ## arrows
+    { key = "ArrowUp", chars = "↑" },
+    { key = "ArrowDown", chars = "↓" },
+    { key = "ArrowRight", chars = "→" },
+    { key = "ArrowLeft", chars = "←" },
+
+    { key = "ArrowUp", chars = "⌘↑", mods = "Command" },
+    { key = "ArrowDown", chars = "⌘↓", mods = "Command" },
+    { key = "ArrowRight", chars = "⌘→", mods = "Command" },
+    { key = "ArrowLeft", chars = "⌘←", mods = "Command" },
+
+    { key = "ArrowUp", chars = "⌥↑", mods = "Alt" },
+    { key = "ArrowDown", chars = "⌥↓", mods = "Alt" },
+    { key = "ArrowRight", chars = "⌥→", mods = "Alt" },
+    { key = "ArrowLeft", chars = "⌥←", mods = "Alt" },
+
+    ## deletions
+    { key = "Delete", chars = "␡" },
+    { key = "Delete", chars = "⌘␡", mods = "Command" },
+    { key = "Delete", chars = "⌥␡", mods = "Alt" },
+
+    { key = "Backspace", chars = "⌘⌫", mods = "Command" },
+    { key = "Backspace", chars = "⌫" },
+    { key = "Backspace", chars = "⌥⌫", mods = "Alt" },
+
+    ## other
+    { key = "Z", chars = "⌘z", mods = "Command" },
+    { key = "Z", chars = "⌘⇧z", mods = "Command|Shift" },
+    { key = "X", chars = "⌘x", mods = "Command" },
+
+    { key = "Enter", chars = "\r" },
+    { key = "Enter", mods = "Shift", chars = "\n" },
+    { key = "Enter", mods = "Alt", chars = "\f" },
 ]

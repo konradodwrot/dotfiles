@@ -20,7 +20,7 @@ opacity = 0.8
 blur = true
 title = "terminal"
 level = "Normal"
-option_as_alt = "OnlyLeft"
+option_as_alt = "Both"
 
 
 [scrolling]
