@@ -6,47 +6,78 @@
 ## ⇧ - shift
 
 
-WORDCHARS="" #[I] words aware commands split on everything but alphanumeric
+WORDCHARS=""
 
 
 bindkey -N key_map
 bindkey -M key_map -R "^@"-"~" self-insert
 
+ESC=$'\u001B'
+CSI=$'\u001B['
+DCS=$'\u0090'
+
+typeset -A keystrokes=(
+    bracketedPaste     "${CSI}200~"
+
+    up                 "${CSI}A"
+    down               "${CSI}B"
+    right              "${CSI}C"
+    left               "${CSI}D"
+
+    cmdUp              "${CSI}1;9A"
+    cmdDown            "${CSI}1;9B"
+    cmdRight           "${CSI}1;9C"
+    cmdLeft            "${CSI}1;9D"
+
+    altLeft            "${CSI}1;3D"
+    altRight           "${CSI}1;3C"
+
+    backspace          $'\b'
+    cmdBackspace       "${DCS}"$'\b'
+    altBackspace       "${ESC}"$'\b'
+
+    delete             "${CSI}3~"
+    altDelete          "${CSI}3;3~"
+    cmdDelete          "${CSI}3;9~"
+
+    cmdZ               "${DCS}z"
+    cmdShiftZ          "${DCS}Z"
+    cmdX               "${DCS}x"
+
+    cr                 $'\r'
+    tab                $'\t'
+)
+
 typeset -A keystrokes_widgets=(
-    # Bracketed paste
-    "^[[200~"   bracketed-paste
+    "$keystrokes[bracketedPaste]"   bracketed-paste
 
-    # Arrows
-    "↑"         up-line-or-history
-    "⌘↑"        beginning-of-buffer-or-history
-    "↓"         down-line-or-history
-    "⌘↓"        end-of-buffer-or-history
-    "→"         forward-char
-    "←"         backward-char
+    "$keystrokes[up]"               up-line-or-history
+    "$keystrokes[down]"             down-line-or-history
+    "$keystrokes[right]"            forward-char
+    "$keystrokes[left]"             backward-char
 
-    "⌥←"        vi-backward-word
-    "⌥→"        vi-forward-word
+    "$keystrokes[cmdUp]"            beginning-of-buffer-or-history
+    "$keystrokes[cmdDown]"          end-of-buffer-or-history
+    "$keystrokes[cmdRight]"         vi-end-of-line
+    "$keystrokes[cmdLeft]"          vi-beginning-of-line
 
-    "⌘→"        vi-end-of-line
-    "⌘←"        vi-beginning-of-line
+    "$keystrokes[altLeft]"          vi-backward-word
+    "$keystrokes[altRight]"         vi-forward-word
 
-    # Deletions
-    "\b"        backward-delete-char
-    "⌘\b"       backward-kill-line
-    "⌥\b"       backward-delete-word
+    "$keystrokes[backspace]"        backward-delete-char
+    "$keystrokes[cmdBackspace]"     backward-kill-line
+    "$keystrokes[altBackspace]"     backward-delete-word
 
-    "␡"         delete-char
-    "⌥␡"        delete-word
-    "⌘␡"        kill-line
+    "$keystrokes[delete]"           delete-char
+    "$keystrokes[altDelete]"        delete-word
+    "$keystrokes[cmdDelete]"        kill-line
 
-    # Other
-    "⌘z"        undo
-    "⌘⇧z"       redo
-    "⌘x"        kill-buffer
+    "$keystrokes[cmdZ]"             undo
+    "$keystrokes[cmdShiftZ]"        redo
+    "$keystrokes[cmdX]"             kill-buffer
 
-    "\r"        accept-line
-    "\f"        accept-line
-    "\t"        expand-or-complete
+    "$keystrokes[cr]"               accept-line
+    "$keystrokes[tab]"              expand-or-complete
 )
 for key wid in ${(kv)keystrokes_widgets}; bindkey -M key_map "${key}" "${wid}" 
 
@@ -54,7 +85,7 @@ bindkey -A key_map main
 
 
 # STTY 
-#[I] before keystroke reaches ZLE it passess through stty, so it have a chance to intercept it and send signal to current the foreground process
+
 
 typeset -a disabled_cchars=(
     discard
@@ -77,10 +108,11 @@ typeset -a disabled_cchars=(
 for cchar in ${disabled_cchars}; stty ${cchar} undef
 
 typeset -A cchars=(
-    susp    '^S'        # Process Suspend 
-    quit    '^Q'        # Process Quit 
+    susp    '^Z'        # Process Suspend (SIGTSTP)
+    quit    '^\\'       # Process Quit + core dump (SIGQUIT)
     erase   '^H'        # Char Remove Backwards
-    status  '^A'        # Process Status
+    intr    '^C'        # Process Interrupt (SIGINT)
+    status  '^T'        # Process Status (SIGINFO)
 )
 
 for action char in ${(kv)cchars}; stty ${action} ${char}

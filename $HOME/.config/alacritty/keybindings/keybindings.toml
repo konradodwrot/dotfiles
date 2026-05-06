@@ -36,40 +36,41 @@ bindings = [
     # zsh
 
     ## arrows
-    { key = "ArrowUp", chars = "↑" },
-    { key = "ArrowDown", chars = "↓" },
-    { key = "ArrowRight", chars = "→" },
-    { key = "ArrowLeft", chars = "←" },
+    { key = "ArrowUp", action = "ReceiveChar" },
+    { key = "ArrowDown", action = "ReceiveChar" },
+    { key = "ArrowRight", action = "ReceiveChar" },
+    { key = "ArrowLeft", action = "ReceiveChar" },
 
-    { key = "ArrowUp", chars = "⌘↑", mods = "Command" },
-    { key = "ArrowDown", chars = "⌘↓", mods = "Command" },
-    { key = "ArrowRight", chars = "⌘→", mods = "Command" },
-    { key = "ArrowLeft", chars = "⌘←", mods = "Command" },
+    { key = "ArrowUp", action = "ReceiveChar", mods = "Command" },
+    { key = "ArrowDown", action = "ReceiveChar", mods = "Command" },
+    { key = "ArrowRight", action = "ReceiveChar", mods = "Command" },
+    { key = "ArrowLeft", action = "ReceiveChar", mods = "Command" },
 
-    { key = "ArrowUp", chars = "⌥↑", mods = "Alt" },
-    { key = "ArrowDown", chars = "⌥↓", mods = "Alt" },
-    { key = "ArrowRight", chars = "⌥→", mods = "Alt" },
-    { key = "ArrowLeft", chars = "⌥←", mods = "Alt" },
+    { key = "ArrowUp", action = "ReceiveChar", mods = "Alt" },
+    { key = "ArrowDown", action = "ReceiveChar", mods = "Alt" },
+    { key = "ArrowRight", action = "ReceiveChar", mods = "Alt" },
+    { key = "ArrowLeft", action = "ReceiveChar", mods = "Alt" },
 
     ## deletions
-    { key = "Delete", chars = "␡" },
-    { key = "Delete", chars = "⌘␡", mods = "Command" },
-    { key = "Delete", chars = "⌥␡", mods = "Alt" },
+    { key = "Delete", action = "ReceiveChar" },
+    { key = "Delete", action = "ReceiveChar", mods = "Command" },
+    { key = "Delete", action = "ReceiveChar", mods = "Alt" },
 
     { key = "Backspace", chars = "\b" },
-    { key = "Backspace", chars = "⌘\b", mods = "Command" },
-    { key = "Backspace", chars = "⌥\b", mods = "Alt" },
+    { key = "Backspace", chars = "\u0090\b", mods = "Command", mode = "~Alt" },
+    { key = "Backspace", chars = "\u001B\b", mods = "Alt" },
 
-    { key = "Numpad0", chars = "\u0013" },         # ^S - Suspend
-    { key = "NumpadSubtract", chars = "\u0011" },  # ^Q - Quit
-    { key = "NumpadEnter", chars = "\u0001" },     # ^A - Status
+    { key = "Numpad0", chars = "\u001A" },          # ^Z - Suspend
+    { key = "NumpadSubtract", chars = "\u001C" },   # ^\ - Quit
+    { key = "NumpadEnter", chars = "\u0014" },      # ^T - Status
+    { key = "NumpadDecimal", chars = "\u0003" },    # ^C - Interrupt
 
     ## other
-    { key = "Z", chars = "⌘z", mods = "Command" },
-    { key = "Z", chars = "⌘⇧z", mods = "Command|Shift" },
-    { key = "X", chars = "⌘x", mods = "Command" },
+    { key = "Z", chars = "\u0090z", mods = "Command", mode = "~Alt" },
+    { key = "Z", chars = "\u0090Z", mods = "Command|Shift", mode = "~Alt" },
+    { key = "X", chars = "\u0090x", mods = "Command", mode = "~Alt" },
 
     { key = "Enter", chars = "\r" },
     { key = "Enter", mods = "Shift", chars = "\n" },
-    { key = "Enter", mods = "Alt", chars = "\f" },
+    { key = "Enter", mods = "Alt", chars = "\n" },
 ]
