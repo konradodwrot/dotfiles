@@ -1,51 +1,59 @@
+# Z Line Editor
+
+## unicode modifiers
+## ⌘ - command
+## ⌥ - alt
+## ⇧ - shift
+
+
+WORDCHARS="" #[I] words aware commands split on everything but alphanumeric
+
+
 bindkey -N key_map
-
-# unicode modifiers
-# ⌘ - command
-# ⌥ - alt
-# ⇧ - shift
-
 bindkey -M key_map -R "^@"-"~" self-insert
-bindkey -M key_map "^[[200~" bracketed-paste
 
-# arrows
-bindkey -M key_map "↑" up-line-or-history                        
-bindkey -M key_map "⌘↑" beginning-of-buffer-or-history 
-bindkey -M key_map "↓" down-line-or-history                    
-bindkey -M key_map "⌘↓" end-of-buffer-or-history       
-bindkey -M key_map "→" forward-char                            
-bindkey -M key_map "←" backward-char                           
+typeset -A keystrokes_widgets=(
+    # Bracketed paste
+    "^[[200~"   bracketed-paste
 
-bindkey -M key_map "⌥←" vi-backward-word              
-bindkey -M key_map "⌥→" vi-forward-word  
+    # Arrows
+    "↑"         up-line-or-history
+    "⌘↑"        beginning-of-buffer-or-history
+    "↓"         down-line-or-history
+    "⌘↓"        end-of-buffer-or-history
+    "→"         forward-char
+    "←"         backward-char
 
-bindkey -M key_map "⌘→" vi-end-of-line             
-bindkey -M key_map "⌘←" vi-beginning-of-line  
+    "⌥←"        vi-backward-word
+    "⌥→"        vi-forward-word
 
-# deletions
-bindkey -M key_map "\b" backward-delete-char                      
-bindkey -M key_map "⌘\b" backward-kill-line             
-bindkey -M key_map "⌥\b" backward-delete-word
+    "⌘→"        vi-end-of-line
+    "⌘←"        vi-beginning-of-line
 
-bindkey -M key_map "␡" delete-char                               
-bindkey -M key_map "⌥␡" delete-word                          
-bindkey -M key_map "⌘␡" kill-line
+    # Deletions
+    "\b"        backward-delete-char
+    "⌘\b"       backward-kill-line
+    "⌥\b"       backward-delete-word
 
-# other
-bindkey -M key_map "⌘z" undo                 
-bindkey -M key_map "⌘⇧z" redo        
-bindkey -M key_map "⌘x" kill-buffer
+    "␡"         delete-char
+    "⌥␡"        delete-word
+    "⌘␡"        kill-line
 
-bindkey -M key_map "\r" accept-line     
-bindkey -M key_map "\f" accept-line    
-bindkey -M key_map "\t" expand-or-complete 
+    # Other
+    "⌘z"        undo
+    "⌘⇧z"       redo
+    "⌘x"        kill-buffer
+
+    "\r"        accept-line
+    "\f"        accept-line
+    "\t"        expand-or-complete
+)
+for key wid in ${(kv)keystrokes_widgets}; bindkey -M key_map "${key}" "${wid}" 
 
 bindkey -A key_map main
 
-WORDCHARS="" # words splits on everything
 
-
-# stty
+# STTY 
 #[I] before keystroke reaches ZLE it passess through stty, so it have a chance to intercept it and send signal to current the foreground process
 
 typeset -a disabled_cchars=(
@@ -77,3 +85,5 @@ typeset -A cchars=(
 
 for action char in ${(kv)cchars}; stty ${action} ${char}
 
+
+unset keystrokes_widgets disabled_cchars cchars
