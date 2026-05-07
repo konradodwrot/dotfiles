@@ -1,20 +1,19 @@
 # Z Line Editor
 
-## unicode modifiers
-## ⌘ - command
-## ⌥ - alt
-## ⇧ - shift
-
-
+#> param definition in - manual: ZSHPARAM(1) 
 WORDCHARS=""
 
 
 bindkey -N key_map
 bindkey -M key_map -R "^@"-"~" self-insert
 
-ESC=$'\u001B'
-CSI=$'\u001B['
-DCS=$'\u0090'
+
+#> https://en.wikipedia.org/wiki/ANSI_escape_code
+
+ESC=$'\u001B'         #[I] introducer for escape sequences; also the Alt/Meta prefix
+CSI=$'\u001B['        #[I] Control Sequence Introducer; prefix for standard key sequences
+DCS=$'\u0090'         #[I] Device Control String; used here as a prefix used for self-defined non canonical keystrokes
+BS="${terminfo[kbs]}" #[?] Backspace byte; varies by terminal - ^H (BS, 0x08) on some, ^? (DEL, 0x7F)
 
 typeset -A keystrokes=(
     bracketedPaste     "${CSI}200~"
@@ -32,9 +31,9 @@ typeset -A keystrokes=(
     altLeft            "${CSI}1;3D"
     altRight           "${CSI}1;3C"
 
-    backspace          $'\b'
-    cmdBackspace       "${DCS}"$'\b'
-    altBackspace       "${ESC}"$'\b'
+    backspace          "${BS}"
+    cmdBackspace       "${DCS}${BS}"
+    altBackspace       "${ESC}${BS}"
 
     delete             "${CSI}3~"
     altDelete          "${CSI}3;3~"
@@ -86,31 +85,16 @@ bindkey -A key_map main
 
 # STTY 
 
-
+#> stty -a # source of cchars 
 typeset -a disabled_cchars=(
-    discard
-    dsusp
-    eof
-    eol
-    eol2
-    erase
-    intr
-    kill
-    lnext
-    quit
-    reprint
     start
-    status
     stop
-    susp
-    werase
 )
 for cchar in ${disabled_cchars}; stty ${cchar} undef
 
 typeset -A cchars=(
     susp    '^Z'        # Process Suspend (SIGTSTP)
     quit    '^\\'       # Process Quit + core dump (SIGQUIT)
-    erase   '^H'        # Char Remove Backwards
     intr    '^C'        # Process Interrupt (SIGINT)
     status  '^T'        # Process Status (SIGINFO)
 )

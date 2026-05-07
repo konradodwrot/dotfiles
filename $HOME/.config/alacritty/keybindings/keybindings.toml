@@ -56,9 +56,9 @@ bindings = [
     { key = "Delete", action = "ReceiveChar", mods = "Command" },
     { key = "Delete", action = "ReceiveChar", mods = "Alt" },
 
-    { key = "Backspace", chars = "\b" },
-    { key = "Backspace", chars = "\u0090\b", mods = "Command", mode = "~Alt" },
-    { key = "Backspace", chars = "\u001B\b", mods = "Alt" },
+    { key = "Backspace", action = "ReceiveChar" },
+    { key = "Backspace", chars = "\u0090\u007F", mods = "Command", mode = "~Alt" },
+    { key = "Backspace", action = "ReceiveChar" , mods = "Alt" },
 
     { key = "Numpad0", chars = "\u001A" },          # ^Z - Suspend
     { key = "NumpadSubtract", chars = "\u001C" },   # ^\ - Quit
