@@ -15,7 +15,7 @@ ZDOTDIR="/Users/konradodwrot/.config/zsh"
 
 [window]
 padding = { x = 3, y = 3 }
-dimensions = { columns = 104, lines = 120 }
+dimensions = { columns = 104, lines = 30 }
 decorations = "Buttonless"
 opacity = 0.8
 blur = true
