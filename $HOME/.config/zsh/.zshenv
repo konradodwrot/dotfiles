@@ -5,6 +5,7 @@ typeset -A dirs_env=(
     XDG_CONFIG_HOME     "${HOME}/.config"                   # user-specific configuration files
     XDG_DATA_HOME       "${HOME}/.local/share"              # user-specific data files
     XDG_STATE_HOME      "${HOME}/.local/state"              # user-specific state data
+    XDG_LOCAL           "${HOME}/.local"
 )
 typeset -a dirs_other=(
     "${HOME}/.local/share/asdf/completions"                 # asdf completions 
@@ -46,6 +47,7 @@ typeset -U path=(
     /opt/homebrew/bin                                       # homebrew bin
     ${ASDF_DATA_DIR}/shims                                  # asdf bins
     /opt/homebrew/share/google-cloud-sdk/bin                # gcloud bin
+    /opt/X11/bin
     /usr/local/bin
     /usr/bin
     /usr/sbin

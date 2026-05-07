@@ -12,17 +12,20 @@ typeset -A zsh_params=(
 for k v in "${(@kv)zsh_params}"; typeset "$k=$v" 
 
 
-typeset -U cdpath
-cdpath=(
+typeset -U cdpath=(
     .
 )
 
 
-typeset -U fpath
-fpath=(
+typeset -U fpath=(
     ${XDG_CONFIG_HOME}/zsh/functions
     ${ASDF_DATA_DIR}/completions
     ${fpath}
+)
+
+typeset -U manpath=(
+    /opt/X11/share/man
+    ${manpath}
 )
 
 
