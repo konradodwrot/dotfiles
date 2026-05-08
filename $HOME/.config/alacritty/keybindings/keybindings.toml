@@ -70,7 +70,8 @@ bindings = [
     { key = "Z", chars = "\u0090Z", mods = "Command|Shift", mode = "~Alt" },
     { key = "X", chars = "\u0090x", mods = "Command", mode = "~Alt" },
 
-    { key = "Enter", chars = "\r" },
     { key = "Enter", mods = "Shift", chars = "\n" },
     { key = "Enter", mods = "Alt", chars = "\n" },
+    { key = "Enter", mods = "Command", chars = "\n" },
+    { key = "Enter", mods = "Control", chars = "\n" }
 ]
