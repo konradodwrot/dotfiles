@@ -1,17 +1,3 @@
 emulate -L zsh
 
-#[I] alacritty, macOS only
-xattr -d -r com.apple.quarantine /Applications/Alacritty.app
-xattr -d -r com.apple.quarantine /opt/homebrew/bin/alacritty
-
-# BetterDisplay contol + F11 - turn off all but main display; control + F12 - turn on all displays
-defaults delete pro.betterdisplay.BetterDisplay KeyboardShortcuts_connectAllDisplays || true
-defaults delete pro.betterdisplay.BetterDisplay KeyboardShortcuts_disconnectAllDisplaysButMain || true
-
-defaults write pro.betterdisplay.BetterDisplay \
-  KeyboardShortcuts_connectAllDisplays \
-  -string '{"carbonKeyCode":111,"carbonModifiers":4096}'
-  
-defaults write pro.betterdisplay.BetterDisplay \
-  KeyboardShortcuts_disconnectAllDisplaysButMain \
-  -string '{"carbonKeyCode":103,"carbonModifiers":4096}'
+defaults write com.apple.screencapture location ~/ScreenCapture
