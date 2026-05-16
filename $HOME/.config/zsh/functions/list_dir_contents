@@ -1,0 +1,59 @@
+# Function listing directory contents, similar to ls
+#   - 2 groups: dirs and files
+#   - dirs are sorted alphanumerically
+#   - files are sorted by modified date
+#
+# Prerequisites:
+#   - wrap in a noglob alias: `alias ll='noglob ll'` for convenient glob usage
+#
+# Example Usage:
+#   ll ./*
+#   ll ./*/*
+#   ll ./**/*
+#   ll
+#   ll ~dotfiles
+#
+# Sample Output: docs/images/list_dir_contents_func_sample_output.png
+
+emulate -L zsh
+
+setopt glob_dots
+
+bytes_to_human() {
+    local v=$1 u
+    for u in B K M G T P E; do
+        (( v < 1024 )) && break
+        (( v = v / 1024.0 ))
+    done
+    printf "%d%s" $v $u
+}
+
+if (( $# )); then
+    local -a expanded
+    local arg
+    for arg in "$@"; do
+        if [[ -d $arg ]]; then
+            expanded+=( $arg/* )
+        else
+            expanded+=( ${~arg} )
+        fi
+    done
+    set -- $expanded
+else
+    set -- ./*
+fi
+
+lines=("${(@f)$(stat -L -f '%Sm|%z|%N%T' -t '%y-%m-%d %H:%M:%S' "$@")}")
+dirs=(${(M)lines:#*/}); files=(${lines:#*/})
+dir_names=(${dirs##*|})
+
+for n in ${(oi)dir_names}; do
+    print ${n#./}
+done
+
+[[ -n $dirs && -n $files ]] && print
+
+for line in ${(Oi)files}; do
+    IFS='|' read -r m s n <<< $line
+    printf "%s   %5s   %s\n" $m "$(bytes_to_human $s)" ${${n%@}#./}
+done

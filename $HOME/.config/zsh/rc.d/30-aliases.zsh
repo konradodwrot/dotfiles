@@ -20,9 +20,11 @@ alias hist_refresh="fc -RL"
 #   -G colorized output
 #   -S sort by size
 #   -W display whiteouts
-alias ll='ls -lhAFGSW'
+alias als='ls -lhAFGSW'
 
 # list attributes
 #   -O show file flags (chflags)
 #   -@ show extended attributes (xattr)
-alias lla='ll -O@%'
+alias alsa='als -O@%'
+
+alias ll='noglob list_dir_contents'
