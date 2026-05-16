@@ -11,3 +11,18 @@ alias ssh_show_config="ssh -G localhost"
 alias stat_h='stat -f "%HT | %A | %u(%Su):%g(%Sg) | %z bytes | %N"'
 
 alias hist_refresh="fc -RL"
+
+# list
+#   -l long format
+#   -A show hidden files except . and ..
+#   -h readable size output
+#   -F denote inode type by symbol
+#   -G colorized output
+#   -S sort by size
+#   -W display whiteouts
+alias ll='ls -lhAFGSW'
+
+# list attributes
+#   -O show file flags (chflags)
+#   -@ show extended attributes (xattr)
+alias lla='ll -O@%'
