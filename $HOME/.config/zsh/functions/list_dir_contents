@@ -1,93 +1,94 @@
-# Function listing directory contents, similar to ls
-#   - 2 groups: dirs and files
-#   - dirs are sorted alphanumerically
-#   - dir size is presented as number of items within the directory
-#   - files are sorted by modified date
+# NAME
+#   ll - list directory contents, similar to ls
 #
-# Prerequisites:
-#   - wrap in a noglob alias: `alias ll='noglob ll'` for convenient glob usage
+# SYNOPSIS
+#   ll [-h|--hide] [-f|--flat] [path|glob ...]
 #
-# Syntax:
-#   ll [-h] [path|glob ...]
+# DESCRIPTION
+#   Lists directory contents in two groups: directories and files.
+#     - Directories are sorted alphanumerically.
+#     - Directory size is presented as the number of items within.
+#     - Files are sorted by modified date.
 #
-#   -h --hide - hide files prefixed with dot `.`
-#   -f --flat - do not count items within files recursively (single level only)
+#   When no path is given, the current directory (./*) is listed.
 #
-# Example Usage:
+# OPTIONS
+#   -h, --hide   Hide files prefixed with a dot `.` that would be found by globs.
+#   -f, --flat   Do not count items within directories recursively
+#                (direct number of items within dir only).
+#
+# PREREQUISITES
+#   Wrap in a noglob alias for convenient glob usage:
+#       alias ll='noglob ll'
+#
+# EXAMPLES
+#   ll
 #   ll ./*
 #   ll ./*/*
-#   ll -h ./**/*
-#   ll
+#   ll --hide ./**/*
+#   ll --flat --hide ./**/*
 #   ll ~dotfiles
 #
-# Sample Output: docs/images/list_dir_contents_func_sample_output.png
+# FILES
+#   docs/images/list_dir_contents_func_sample_output.png   Sample output
 
 emulate -L zsh
 
 # unpack options
 zparseopts -D -F -E -A opts -- h -hide f -flat
 
-local hide=0 flat_dir_count=0
-(( ${+opts[-h]} || ${+opts[--hide]} )) && hide=1
-(( ${+opts[-f]} || ${+opts[--flat]} )) && flat_dir_count=1
+# locals
+local opt_hide=$(( ${+opts[-h]} || ${+opts[--hide]} ))
+local opt_flat=$(( ${+opts[-f]} || ${+opts[--flat]} ))
+local arg n line clean m s
+local -a normalized_args=() lines dirs files dir_names
 
-(( hide )) || setopt glob_dots
+(( opt_hide )) || setopt glob_dots
 
-# TODO: unpack arguments 
-if (( $# )); then
-    local -a expanded
-    local arg
-    for arg in "$@"; do
-        if [[ -d $arg ]]; then
-            expanded+=( $arg/* )
-        else
-            expanded+=( ${~arg} )
-        fi
-    done
-    set -- $expanded
-else
-    set -- ./*
-fi
-
-count_items_within_dir() {
-    local dir=${1:-.} hide=${2:-0} flat=${3:-0}
-    local -a dirs files
-
-    if (( flat_dir_count )); then
-        dirs=(  $dir/*(N-/) )
-        files=( $dir/*(N-.) )
+# unpack args
+for arg in "${@:-./*}"; do
+    if [[ -d "$arg" ]]; then
+        normalized_args+=( "${arg%/}/*" ) # normalize no glob dirs
     else
-        dirs=(  $dir/**/*(N-/) )
-        files=( $dir/**/*(N-.) )
+        normalized_args+=( "$arg" )
     fi
+done
 
-    print -r -- "${#dirs} ${#files}"
+_ll_count_items() {
+    local dir="${1:-.}" flat="${2:-0}"
+    local -a d f
+    if (( flat )); then
+        d=( $dir/*(N-/) ); f=( $dir/*(N-.) )
+    else
+        d=( $dir/**/*(N-/) ); f=( $dir/**/*(N-.) )
+    fi
+    reply=( "${#d}" "${#f}" )
 }
 
-
-bytes_to_human() {
+_ll_format_bytes() {
     local v=$1 u
     for u in B K M G T P E; do
         (( v < 1024 )) && break
-        (( v = v / 1024.0 ))
+        (( v = v / 1024 ))   # integer division
     done
-    printf "%d%s" $v $u
+    REPLY="${v}${u}"
 }
 
-lines=("${(@f)$(stat -L -f '%Sm|%z|%N%T' -t '%y-%m-%d %H:%M:%S' "$@")}")
-dirs=(${(M)lines:#*/}); files=(${lines:#*/})
+lines=("${(@f)$(stat -L -f '%Sm|%z|%N%T' -t '%y-%m-%d %H:%M:%S' $~normalized_args)}")
+dirs=(${(M)lines:#*/})
+files=(${lines:#*/})
 dir_names=(${dirs##*|})
 
 for n in ${(oi)dir_names}; do
-    local clean=${n#./}
-    local counts="$(count_items_within_dir $n $hide)"
-    local d=${counts%% *} f=${counts##* }
-    printf "📁%-6d 📄%-6d  %s\n" $d $f $clean
+    clean="${n#./}"
+    _ll_count_items "$n" "$opt_flat"
+    printf "📁%-6d 📄%-6d  %s\n" "$reply[1]" "$reply[2]" "$clean"
 done
 
-[[ -n $dirs && -n $files ]] && print
+(( ${#dirs} && ${#files} )) && print
 
 for line in ${(Oi)files}; do
     IFS='|' read -r m s n <<< $line
-    printf "%s   %5s   %s\n" $m "$(bytes_to_human $s)" ${${n%@}#./}
+    _ll_format_bytes "$s"
+    printf "%s   %5s   %s\n" "$m" "$REPLY" "${${n%@}#./}"
 done
