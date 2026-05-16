@@ -1,6 +1,7 @@
 # Function listing directory contents, similar to ls
 #   - 2 groups: dirs and files
 #   - dirs are sorted alphanumerically
+#   - dir size is presented as number of items within the directory
 #   - files are sorted by modified date
 #
 # Prerequisites:
@@ -9,7 +10,8 @@
 # Syntax:
 #   ll [-h] [path|glob ...]
 #
-#   -h - hide files prefixed with dot `.`
+#   -h --hide - hide files prefixed with dot `.`
+#   -f --flat - do not count items within files recursively (single level only)
 #
 # Example Usage:
 #   ll ./*
@@ -23,17 +25,15 @@
 emulate -L zsh
 
 # unpack options
-local hide=0
-while getopts "h" opt; do
-    case $opt in
-        h) hide=1 ;;
-    esac
-done
-shift $((OPTIND - 1))
+zparseopts -D -F -E -A opts -- h -hide f -flat
+
+local hide=0 flat_dir_count=0
+(( ${+opts[-h]} || ${+opts[--hide]} )) && hide=1
+(( ${+opts[-f]} || ${+opts[--flat]} )) && flat_dir_count=1
 
 (( hide )) || setopt glob_dots
 
-# unpack arguments
+# TODO: unpack arguments 
 if (( $# )); then
     local -a expanded
     local arg
@@ -49,6 +49,22 @@ else
     set -- ./*
 fi
 
+count_items_within_dir() {
+    local dir=${1:-.} hide=${2:-0} flat=${3:-0}
+    local -a dirs files
+
+    if (( flat_dir_count )); then
+        dirs=(  $dir/*(N-/) )
+        files=( $dir/*(N-.) )
+    else
+        dirs=(  $dir/**/*(N-/) )
+        files=( $dir/**/*(N-.) )
+    fi
+
+    print -r -- "${#dirs} ${#files}"
+}
+
+
 bytes_to_human() {
     local v=$1 u
     for u in B K M G T P E; do
@@ -63,7 +79,10 @@ dirs=(${(M)lines:#*/}); files=(${lines:#*/})
 dir_names=(${dirs##*|})
 
 for n in ${(oi)dir_names}; do
-    print ${n#./}
+    local clean=${n#./}
+    local counts="$(count_items_within_dir $n $hide)"
+    local d=${counts%% *} f=${counts##* }
+    printf "📁%-6d 📄%-6d  %s\n" $d $f $clean
 done
 
 [[ -n $dirs && -n $files ]] && print
