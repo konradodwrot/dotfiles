@@ -6,10 +6,15 @@
 # Prerequisites:
 #   - wrap in a noglob alias: `alias ll='noglob ll'` for convenient glob usage
 #
+# Syntax:
+#   ll [-h] [path|glob ...]
+#
+#   -h - hide files prefixed with dot `.`
+#
 # Example Usage:
 #   ll ./*
 #   ll ./*/*
-#   ll ./**/*
+#   ll -h ./**/*
 #   ll
 #   ll ~dotfiles
 #
@@ -17,17 +22,18 @@
 
 emulate -L zsh
 
-setopt glob_dots
+# unpack options
+local hide=0
+while getopts "h" opt; do
+    case $opt in
+        h) hide=1 ;;
+    esac
+done
+shift $((OPTIND - 1))
 
-bytes_to_human() {
-    local v=$1 u
-    for u in B K M G T P E; do
-        (( v < 1024 )) && break
-        (( v = v / 1024.0 ))
-    done
-    printf "%d%s" $v $u
-}
+(( hide )) || setopt glob_dots
 
+# unpack arguments
 if (( $# )); then
     local -a expanded
     local arg
@@ -42,6 +48,15 @@ if (( $# )); then
 else
     set -- ./*
 fi
+
+bytes_to_human() {
+    local v=$1 u
+    for u in B K M G T P E; do
+        (( v < 1024 )) && break
+        (( v = v / 1024.0 ))
+    done
+    printf "%d%s" $v $u
+}
 
 lines=("${(@f)$(stat -L -f '%Sm|%z|%N%T' -t '%y-%m-%d %H:%M:%S' "$@")}")
 dirs=(${(M)lines:#*/}); files=(${lines:#*/})
