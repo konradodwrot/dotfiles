@@ -1,0 +1,16 @@
+**/.*/
+**/.*
+
+**/venv/
+**/node_modules/
+**/terraform.tfstate*
+
+# inverse rules
+!**/.github/
+!**/.devcontainer/
+
+!**/.gitignore
+!**/.dockerignore
+!**/.python-version
+!**/.gitlab-ci.yml
+!**/.env.example
