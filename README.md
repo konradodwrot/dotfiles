@@ -14,20 +14,13 @@ My configuration files
 
 ## Loading Configuration
 
-I use my own zsh bunch of scripts for loading dotfiles called `che`. It's optimized for minimal actions needed to store configuration remotely.
-
 ```sh
-che                         
-che install <REPO>
+# copy files as hard links and create intermediate dirs
+# when zsh config is not yet loaded
+cp -Rlfv '$HOME'/. ${HOME}/
 
-che mkdirs
-che mklinks
-
-che add <file>
-che add --no-git <file>
-
-che backup all
-che clean all
+# when zsh config is already loaded, using function
+load_dotfiles
 ```
 
 ## Comments - Information Annotation 

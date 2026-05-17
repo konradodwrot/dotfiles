@@ -1,0 +1,10 @@
+# DESCRIPTION
+#   install config files by creating hard links of all leaf config files, creating dirs on the fly
+#   files not tracked by dotfiles are not touched 
+emulate -L zsh
+
+# -R - entire subtree
+# -l - create hard links
+# -f - if file exists, override
+# -v - verbose, prints linked files
+cp -Rlfv ~dotfiles/'$HOME'/. ${HOME}/
