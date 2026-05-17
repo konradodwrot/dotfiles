@@ -30,7 +30,7 @@ typeset -A env_vars=(
     EDITOR              "vim"
     FCEDIT              "vim"
     LANG                "C.UTF-8"
-    LC_COLLATE          "pl_PL.UTF-8"
+    LC_COLLATE          "C.UTF-8"
     LC_CTYPE            "C.UTF-8"
     LC_MESSAGES         "C.UTF-8"
     LC_NUMERIC          "C.UTF-8"
